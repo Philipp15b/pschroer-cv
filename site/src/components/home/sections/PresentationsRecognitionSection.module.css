@@ -1,0 +1,19 @@
+.compactList,
+.recognitionList {
+  display: grid;
+}
+
+.compactList {
+  gap: 0.42rem;
+}
+
+.recognitionList {
+  gap: 0.5rem;
+}
+
+@media print {
+  .compactList,
+  .recognitionList {
+    gap: 0;
+  }
+}

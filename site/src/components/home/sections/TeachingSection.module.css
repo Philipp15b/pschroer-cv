@@ -1,0 +1,85 @@
+@value bpMobile from "../../../styles/breakpoints.module.css";
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--section-entry-gap);
+}
+
+.grid article {
+  padding: var(--section-entry-padding-top) 0 0;
+  border-top: var(--entry-rule);
+}
+
+.grid h3 {
+  margin: var(--section-entry-heading-margin);
+  font-size: var(--section-entry-heading-font-size);
+}
+
+.courseList {
+  --course-list-gap: calc(var(--section-entry-gap) * 0.55);
+  display: grid;
+  gap: var(--course-list-gap);
+  margin: var(--course-list-gap) 0 0;
+  padding-left: calc(var(--section-entry-gap) * 1.8);
+  color: var(--muted);
+}
+
+.courseList li {
+  padding-left: calc(var(--course-list-gap) * 0.16);
+}
+
+.terms {
+  display: block;
+  margin-top: calc(var(--course-list-gap) / 4);
+  font-size: 0.93em;
+}
+
+.terms::before {
+  content: "(";
+}
+
+.terms::after {
+  content: ")";
+}
+
+@media (max-width: bpMobile) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3mm;
+    align-items: start;
+  }
+
+  .grid article {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .grid h3 {
+    margin: var(--print-entry-title-margin);
+    color: var(--ink);
+    font-size: var(--print-entry-title-font-size);
+    line-height: 1.18;
+  }
+
+  .courseList {
+    gap: calc(var(--print-entry-margin-top) * 0.6);
+    margin-top: calc(var(--print-entry-margin-top) * 0.75);
+    padding-left: 9pt;
+    color: var(--muted);
+    font-size: var(--print-entry-body-font-size);
+  }
+
+  .terms {
+    display: inline;
+    margin-top: 0;
+    font-size: inherit;
+  }
+}

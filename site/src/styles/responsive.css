@@ -1,0 +1,16 @@
+/*
+ * Keep these media queries in sync with styles/breakpoints.module.css.
+ * CSS custom properties cannot be used in @media conditions, so component
+ * modules use compile-time @value breakpoint tokens instead.
+ */
+@media (max-width: 1040px) {
+  :root {
+    --anchor-offset: 122px;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --header-height: 64px;
+  }
+}

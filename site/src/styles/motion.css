@@ -1,0 +1,24 @@
+/* data-reveal is a behavior hook declared in domHooks.ts and managed by main.ts. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 520ms ease,
+      transform 520ms ease;
+  }
+
+  .js [data-reveal][data-reveal-visible="true"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}

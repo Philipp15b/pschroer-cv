@@ -1,0 +1,324 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[
+  a4paper,
+  top=1.45cm,
+  bottom=1.55cm,
+  left=1.55cm,
+  right=1.55cm
+]{geometry}
+\usepackage[default,semibold]{sourcesanspro}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{microtype}
+\usepackage{hyperxmp}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{fancyhdr}
+
+\definecolor{accent}{HTML}{146C59}
+\definecolor{accentdark}{HTML}{0E4C3E}
+\definecolor{accentlight}{HTML}{1A8C74}
+\definecolor{text}{HTML}{26312F}
+\definecolor{muted}{HTML}{61716C}
+\definecolor{rulegray}{HTML}{DDE9E5}
+
+\hypersetup{
+  unicode=true,
+  pdfencoding=auto,
+  psdextra,
+  colorlinks=true,
+  urlcolor=accent,
+  linkcolor=accent,
+  pdfdisplaydoctitle=true,
+  pdfpagelayout=OneColumn,
+  pdfpagemode=UseOutlines,
+  pdfstartview=FitH,
+  bookmarksopen=true,
+  bookmarksopenlevel=1,
+  bookmarksdepth=2,
+  pdflang={en-US},
+  pdfauthor={Philipp Schroer},
+  pdftitle={Philipp Schroer - Curriculum Vitae},
+  pdfsubtitle={PhD Student in Formal Verification},
+  pdfsubject={Curriculum Vitae},
+  pdfkeywords={Philipp Schroer, curriculum vitae, verification, probabilistic programs, Caesar, RWTH Aachen University},
+  pdfurl={https://moves.rwth-aachen.de/people/philipp-schroer/}
+}
+\bookmarksetup{open,openlevel=1,numbered=false}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\footnotesize\color{muted}Philipp Schr\"oer \quad\textbullet\quad Curriculum Vitae \quad\textbullet\quad \thepage/\ref*{TotPages}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+% Shared layout values; one-off spacing stays at the point of use.
+\newlength{\cventrytablesep}
+\setlength{\cventrytablesep}{-0.35em}
+\newlength{\cvdatecolsep}
+\setlength{\cvdatecolsep}{0.27cm}
+\newlength{\cvphotoradius}
+\setlength{\cvphotoradius}{1.35cm}
+\newlength{\cvtablerowskip}
+\setlength{\cvtablerowskip}{0.20em}
+\newcommand{\cventryarraystretch}{0.84}
+
+\setlist[itemize]{
+  leftmargin=1.15em,
+  topsep=0.16em,
+  itemsep=0.1em,
+  parsep=0em,
+  partopsep=0em
+}
+
+\newcommand{\nameline}[2]{{\fontsize{27}{31}\selectfont\bfseries #1 \textcolor{accent}{#2}}}
+\newcommand{\contactsep}{\hspace{0.8em}{\color{rulegray}\textbar}\hspace{0.8em}}
+\newcommand{\contactitem}[2]{\textcolor{accent}{#1}\hspace{0.35em}{#2}}
+\newif\ifcvshowcontactoverride
+\newcommand{\cvcontactoverrideline}{}
+\ifdefined\CVContactBuild
+  \InputIfFileExists{cv-contact.tex}{}{\PackageWarningNoLine{cv}{Contact override requested, but cv-contact.tex was not found}}%
+\fi
+\newcommand{\profilephoto}[1]{%
+  \begin{tikzpicture}
+    \clip (0,0) circle (\cvphotoradius);
+    \node at (0,-0.09cm) {\includegraphics[width=3.22cm]{#1}};
+    \draw[accentlight, line width=0.7pt] (0,0) circle (\cvphotoradius);
+  \end{tikzpicture}%
+}
+\newcounter{cvsection}
+\newcounter{cvsubsection}[cvsection]
+\newcommand{\cvsection}[1]{%
+  \par\vspace{0.85em}%
+  \refstepcounter{cvsection}%
+  \phantomsection%
+  \pdfbookmark[1]{#1}{cvsection.\thecvsection}%
+  \noindent
+  {\large\bfseries\color{accentdark} #1}\hspace{0.75em}{\color{accent}\rule[0.43em]{2.7cm}{0.8pt}}%
+  \par\vspace{0.34em}%
+}
+\newcommand{\cvsubsection}[1]{%
+  \par\vspace{0.45em}%
+  \refstepcounter{cvsubsection}%
+  \phantomsection%
+  \pdfbookmark[2]{#1}{cvsubsection.\thecvsection.\thecvsubsection}%
+  \noindent{\bfseries\color{text}#1}\par\vspace{0.15em}%
+}
+\newcommand{\experienceentry}[5]{%
+  \begingroup
+  \renewcommand{\arraystretch}{\cventryarraystretch}%
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}X>{\RaggedLeft\arraybackslash}p{3.05cm}@{}}
+    {\bfseries\color{text}#1} & {\small\color{accent}#4} \\[\cventrytablesep]
+    {\small\color{muted}#2} & {\small\color{muted}#3} \\
+  \end{tabularx}%
+  \endgroup
+  \vspace{0.05em}%
+  #5%
+  \vspace{0.42em}\par%
+}
+\newcommand{\educationentry}[4]{%
+  \begingroup
+  \renewcommand{\arraystretch}{\cventryarraystretch}%
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}X>{\RaggedLeft\arraybackslash}p{2.55cm}@{}}
+    {\bfseries\color{text}#1} & {\small\color{accent}#3} \\[\cventrytablesep]
+    {\small\color{muted}#2} & {\small\color{muted}#4} \\
+  \end{tabularx}%
+  \endgroup
+  \vspace{0.24em}%
+}
+\newcommand{\tablelabel}[1]{{\small\bfseries\color{accent}#1}}
+\newcommand{\pubauthors}[1]{{\small\color{muted}#1}}
+\newcommand{\pubvenue}[1]{{\small\bfseries\color{accentdark}#1}}
+\newcommand{\talkvenue}[2]{{\small\bfseries\color{accentdark}#1} {\small\color{muted}#2}}
+\begin{document}
+\color{text}
+\phantomsection
+\pdfbookmark[1]{Profile}{profile}
+
+\noindent
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}X>{\RaggedLeft\arraybackslash}m{3.05cm}@{}}
+  \begin{minipage}[c]{\linewidth}
+    \nameline{Philipp}{Schr\"oer}\\[-0.1em]
+    {\large\color{muted}PhD Student in Formal Verification}\\[0.55em]
+    {\small
+      \contactitem{\faIcon{globe}}{\href{https://moves.rwth-aachen.de/people/philipp-schroer/}{website}}
+      \contactsep
+      \contactitem{\faIcon{github}}{\href{https://github.com/Philipp15b/}{GitHub}}
+      \contactsep
+      \contactitem{\faIcon{orcid}}{\href{https://orcid.org/0000-0002-4329-530X}{ORCID}}
+      \contactsep
+      \contactitem{\faIcon{book}}{\href{https://dblp.org/pid/264/0074}{DBLP}}
+    }\\[0.32em]
+    {\small
+      \contactitem{\faIcon{envelope}}{\href{mailto:mail@pschroer.de}{mail@pschroer.de}}
+      \contactsep
+      \contactitem{\faIcon{envelope}}{\href{mailto:phisch@cs.rwth-aachen.de}{phisch@cs.rwth-aachen.de}}
+    }
+    \ifcvshowcontactoverride
+      \\[0.32em]
+      {\small\cvcontactoverrideline}
+    \fi
+  \end{minipage}
+  &
+  \profilephoto{philipp-schroer-portrait.png}
+\end{tabularx}
+
+\vspace{0.65em}
+I am a PhD student in the \href{https://moves.rwth-aachen.de/}{Software Modeling and Verification Group} at RWTH Aachen University. I care about solid foundations for probabilistic verification and bringing theory into practice by developing \href{https://www.caesarverifier.org/}{Caesar}, an automated verification infrastructure for reasoning about software with randomness and proving quantitative correctness properties.
+
+\cvsection{Experience}
+\experienceentry
+  {Doctoral Researcher / PhD Student}
+  {\href{https://moves.rwth-aachen.de/}{Software Modeling and Verification Group}, \href{https://www.rwth-aachen.de/}{RWTH Aachen University}}
+  {Aachen}
+  {2022--present}
+  {
+    \begin{itemize}
+      \item Design and implementation of \emph{Caesar}: an open-source deductive verifier for probabilistic programs, including HeyVL, HeyLo, SMT-based verification, model-checking integration, diagnostics, and VS Code tooling.
+      \item Teach lectures, seminars, and practical courses in probabilistic programming, model checking, concurrency theory, and software verification; prepare exercises, lead sessions, supervise students, and support course organization.
+      \item Publish and present research on probabilistic program verification, including work at OOPSLA, CAV, ESOP, and FM.
+    \end{itemize}
+  }
+
+\experienceentry
+  {Student Assistant}
+  {\href{https://moves.rwth-aachen.de/}{Software Modeling and Verification Group}, \href{https://www.rwth-aachen.de/}{RWTH Aachen University}}
+  {Aachen}
+  {2019--2021}
+  {
+    \begin{itemize}
+      \item Contributed to research prototypes and publications on MDP model checking, latticed k-induction, and probabilistic-program verification.
+      \item Served as CAV 2021 artifact evaluator and supported research software development in probabilistic verification.
+    \end{itemize}
+  }
+
+\experienceentry
+  {Software Consultant}
+  {\href{https://www.campusonline.tugraz.at/}{CAMPUSonline}, \href{https://www.tugraz.at/}{TU Graz}}
+  {Graz / Aachen}
+  {2019}
+  {
+    \begin{itemize}
+      \item Improved performance and user-interface behavior in the RWTHonline frontend.
+      \item Developed components of the ``CoCommunity'' communication program.
+    \end{itemize}
+  }
+
+\experienceentry
+  {Student Assistant}
+  {\href{https://learntech.rwth-aachen.de/}{LuFG i9}, \href{https://www.rwth-aachen.de/}{RWTH Aachen University}}
+  {Aachen}
+  {2018}
+  {
+    \begin{itemize}
+      \item Designed and implemented features for \href{https://swofi.net/}{SWOFI}, a scientific-workflow learning platform.
+    \end{itemize}
+  }
+
+\cvsection{Education}
+\educationentry
+  {PhD Student in Computer Science}
+  {\href{https://www.rwth-aachen.de/}{RWTH Aachen University}, \href{https://moves.rwth-aachen.de/}{Software Modeling and Verification Group}; supervisor: \href{https://moves.rwth-aachen.de/people/katoen/}{Joost-Pieter Katoen}}
+  {2022--present}
+  {Aachen}
+
+\educationentry
+  {M.Sc. Computer Science}
+  {\href{https://www.rwth-aachen.de/}{RWTH Aachen University}; thesis: \href{https://www.caesarverifier.org/docs/publications\#master-thesis-22-a-deductive-verifier-for-probabilistic-programs}{\emph{A Deductive Verifier for Probabilistic Programs}}}
+  {2019--2022}
+  {Aachen}
+
+\educationentry
+  {B.Sc. Computer Science}
+  {\href{https://www.rwth-aachen.de/}{RWTH Aachen University}; thesis: \emph{Understanding Abstraction of Probabilistic Programs}}
+  {2015--2019}
+  {Aachen}
+
+\cvsection{Research}
+{\bfseries\color{text}\href{https://www.caesarverifier.org/}{\includegraphics[height=\fontcharht\font`C]{caesar-laurel.pdf}\hspace{0.35em}Caesar verifier}}\hfill{\small\color{accent}main project}\par
+Caesar is a deductive verifier for probabilistic programs.
+Its core language HeyVL, based on the real-valued logic HeyLo, expresses programs, specifications, and proof rules based on weakest pre-expectation-style semantics.
+Caesar uses SMT-based reasoning for verification and also provides a probabilistic model-checking backend for a subset of HeyVL.
+
+\cvsubsection{Selected Publications}
+\begingroup
+\setlength{\LTpre}{0pt}%
+\setlength{\LTpost}{0pt}%
+\setlength{\LTleft}{0pt}%
+\setlength{\LTright}{0pt}%
+\begin{longtable}{@{}p{1.2cm}@{\hspace{\cvdatecolsep}}>{\RaggedRight\arraybackslash}p{\dimexpr\textwidth-1.2cm-\cvdatecolsep\relax}@{}}
+\endfirsthead
+  \multicolumn{2}{@{}l@{}}{\small\bfseries\color{text}Selected Publications (continued)} \\[\cvtablerowskip]
+\endhead
+  \tablelabel{2026} & \href{https://www.caesarverifier.org/docs/publications\#cav-26-caesar-a-deductive-verifier-for-probabilistic-programs}{\textbf{Caesar: A Deductive Verifier for Probabilistic Programs.}} \pubvenue{CAV 2026.} \pubauthors{Philipp Schr\"oer, Kevin Batz, Umut Yi\u{g}it Dural, Darion Haase, Benjamin Lucien Kaminski, Joost-Pieter Katoen, Christoph Matheja.} \\[\cvtablerowskip]
+  \tablelabel{2026} & \href{https://www.caesarverifier.org/docs/publications\#esop-26-error-localization-certificates-and-hints-for-probabilistic-program-verification-via-slicing}{\textbf{Error Localization, Certificates, and Hints for Probabilistic Program Verification via Slicing.}} \pubvenue{ESOP 2026.} \pubauthors{Philipp Schr\"oer, Darion Haase, Joost-Pieter Katoen.} \\[\cvtablerowskip]
+  \tablelabel{2025} & \href{https://link.springer.com/chapter/10.1007/978-3-031-75783-9_6}{\textbf{Symbolic Quantitative Information Flow for Probabilistic Programs.}} \pubvenue{Principles of Verification: Cycling the Probabilistic Landscape.} \pubauthors{Philipp Schr\"oer, Francesca Randone, Ra\'ul Pardo, Andrzej W\k{a}sowski.} \\[\cvtablerowskip]
+  \tablelabel{2023} & \href{https://www.caesarverifier.org/docs/publications\#oopsla-23}{\textbf{A Deductive Verification Infrastructure for Probabilistic Programs.}} \pubvenue{OOPSLA 2023. Distinguished Artifact.} \pubauthors{Philipp Schr\"oer, Kevin Batz, Benjamin Lucien Kaminski, Joost-Pieter Katoen, Christoph Matheja.} \\[\cvtablerowskip]
+  \tablelabel{2021} & \href{https://link.springer.com/chapter/10.1007/978-3-030-81688-9_25}{\textbf{Latticed k-Induction with an Application to Probabilistic Programs.}} \pubvenue{CAV 2021.} \pubauthors{Kevin Batz, Mingshuai Chen, Benjamin Lucien Kaminski, Joost-Pieter Katoen, Christoph Matheja, Philipp Schr\"oer.} \\[\cvtablerowskip]
+  \tablelabel{2020} & \href{https://link.springer.com/chapter/10.1007/978-3-030-53291-8_27}{\textbf{PrIC3: Property Directed Reachability for MDPs.}} \pubvenue{CAV 2020.} \pubauthors{Kevin Batz, Sebastian Junges, Benjamin Lucien Kaminski, Joost-Pieter Katoen, Christoph Matheja, Philipp Schr\"oer.}
+\end{longtable}%
+\endgroup
+
+\cvsection{Teaching}
+{\small\color{muted}Teaching assistant for lectures, seminars, and practical courses; preparing exercises, leading sessions, supervising students, and supporting course organization.}\par\vspace{\cvtablerowskip}
+\begingroup
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}l@{\hspace{\cvdatecolsep}}>{\RaggedRight\arraybackslash}X@{}}
+  \tablelabel{Practical} &
+    \href{https://moves.rwth-aachen.de/teaching/ss-26/swp/}{Implementation of Heuristic Algorithms for Board Games} (\href{https://moves.rwth-aachen.de/teaching/ss-26/swp/}{SS26}, \href{https://moves.rwth-aachen.de/teaching/ss-25/swp/}{SS25});
+    \href{https://moves.rwth-aachen.de/teaching/ws-2025-26/practical-course-model-checking/}{Model Checking} (\href{https://moves.rwth-aachen.de/teaching/ws-2025-26/practical-course-model-checking/}{WS25/26}, \href{https://moves.rwth-aachen.de/teaching/ws-2024-25/gntmc/}{WS24/25}) \\[\cvtablerowskip]
+  \tablelabel{Lectures} &
+    \href{https://moves.rwth-aachen.de/teaching/ws-2025-26/probabilistic-programming/}{Probabilistic Programming} (\href{https://moves.rwth-aachen.de/teaching/ws-2025-26/probabilistic-programming/}{WS25/26}, \href{https://moves.rwth-aachen.de/teaching/ss-24/probabilistic-programming/}{SS24}, \href{https://moves.rwth-aachen.de/teaching/ws-22-23/probabilistic-programming-winter-22-23/}{WS22/23});
+    \href{https://moves.rwth-aachen.de/teaching/ws-23-24/ct/}{Concurrency Theory} (\href{https://moves.rwth-aachen.de/teaching/ws-23-24/ct/}{WS23/24});
+    \href{https://moves.rwth-aachen.de/teaching/ss-23/savos/}{Semantics and Verification of Software} (\href{https://moves.rwth-aachen.de/teaching/ss-23/savos/}{SS23}) \\[\cvtablerowskip]
+  \tablelabel{Seminars} &
+    \href{https://moves.rwth-aachen.de/teaching/ws-2024-25/propro/}{Probabilistic Programming} (\href{https://moves.rwth-aachen.de/teaching/ws-2024-25/propro/}{WS24/25}, \href{https://moves.rwth-aachen.de/teaching/ss-23/propro/}{SS23}, \href{https://moves.rwth-aachen.de/teaching/ws-22-23/proprosem/}{WS22/23});
+    \href{https://moves.rwth-aachen.de/teaching/ws-23-24/verification/}{Deductive Verification} (\href{https://moves.rwth-aachen.de/teaching/ws-23-24/verification/}{WS23/24});
+    \href{https://moves.rwth-aachen.de/teaching/ss-22/cav/}{Trends in Computer-Aided Verification} (\href{https://moves.rwth-aachen.de/teaching/ss-22/cav/}{SS22})
+\end{tabularx}%
+\endgroup
+
+\cvsection{Selected Talks}
+\begingroup
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}l@{\hspace{\cvdatecolsep}}>{\RaggedRight\arraybackslash}X@{}}
+  \tablelabel{2026} & \href{https://www.caesarverifier.org/docs/publications\#fm-26-highly-incremental-a-simple-programmatic-approach-for-many-objectives}{Highly Incremental: A Simple Programmatic Approach for Many Objectives.} \talkvenue{FM 2026.}{Tokyo, Japan.} \\[\cvtablerowskip]
+  \tablelabel{2026} & \href{https://www.caesarverifier.org/docs/publications\#esop-26-error-localization-certificates-and-hints-for-probabilistic-program-verification-via-slicing}{Error Localization, Certificates, and Hints for Probabilistic Program Verification via Slicing.} \talkvenue{ESOP 2026.}{Turin, Italy.} \\[\cvtablerowskip]
+  \tablelabel{2025} & \href{https://www.caesarverifier.org/blog/2025/06/10/caesar-at-ssft-25}{Caesar at Summer School for Formal Techniques.} \talkvenue{SSFT 2025.}{Menlo Park, CA, USA.} \\[\cvtablerowskip]
+  \tablelabel{2024} & \href{https://www.caesarverifier.org/blog/2024/01/14/dafny-2024-talk/}{Caesar: A Verifier for Probabilistic Programs.} \talkvenue{Dafny workshop at POPL 2024.}{London, UK.} \\[\cvtablerowskip]
+  \tablelabel{2023} & \href{https://www.caesarverifier.org/blog/2023/09/28/oopsla23/}{A Deductive Verification Infrastructure for Probabilistic Programs.} \talkvenue{OOPSLA 2023.}{Cascais, Portugal.} \\[\cvtablerowskip]
+  \tablelabel{2022} & \href{https://veriprop.github.io/2022/}{A Quantitative Verification Infrastructure.} \talkvenue{VeriProP.}{Haifa, Israel.} \\[\cvtablerowskip]
+  \tablelabel{2022} & \href{https://conferences.cirm-math.fr/2686.html}{Building a Deductive Verifier for Probabilistic Programs.} \talkvenue{Logic of Probabilistic Programming.}{CIRM, Marseille, France.}
+\end{tabularx}%
+\endgroup
+
+\cvsection{Awards \& Funding}
+\begingroup
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}l@{\hspace{\cvdatecolsep}}>{\RaggedRight\arraybackslash}X@{}}
+  \tablelabel{2024} & \href{https://www.caesarverifier.org/blog/2024/01/18/erc-poc-grant/}{ERC Proof of Concept Grant, VERIPROB}: funding for the MOVES group to improve Caesar and transfer the verifier toward practical use. \\[\cvtablerowskip]
+  \tablelabel{2022} & \href{https://www.caesarverifier.org/blog/2022/10/10/whatsapp-privacy-aware-program-analysis/}{WhatsApp Privacy Aware Program Analysis Research Award}: awarded with Joost-Pieter Katoen for ``A Deductive Verification Infrastructure for Probabilistic Programs''; 6 of 62 proposals selected.
+\end{tabularx}%
+\endgroup
+
+\cvsection{Service}
+{\small\bfseries\color{accent}Artifact evaluation program committees:} \href{https://2024.ecoop.org/track/ecoop-2024-artifact-evaluation}{ECOOP 2024}, \href{https://2024.splashcon.org/track/splash-2024-oopsla-artifacts}{OOPSLA 2024}, \href{https://www.qest.org/qest2023/committees.html}{QEST 2023}, \href{https://i-cav.org/2022/organization/}{CAV 2022}, \href{https://popl22.sigplan.org/track/POPL-2022-artifact-evaluation}{POPL 2022}, \href{https://i-cav.org/2021/organization/}{CAV 2021}.\par\vspace{\cvtablerowskip}
+{\small\bfseries\color{accent}External review:} \href{https://www.fm24.polimi.it/}{FM 2024}, \href{https://etaps.org/2023/conferences/}{TACAS 2023}.
+
+\cvsection{Skills}
+\begingroup
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}l@{\hspace{\cvdatecolsep}}>{\RaggedRight\arraybackslash}X@{}}
+  \tablelabel{Methods} & Deductive verification, probabilistic programs, SMT solving, weakest pre-expectation reasoning, \mbox{model checking}, program analysis, quantitative logics. \\[\cvtablerowskip]
+  \tablelabel{Code} & Rust, Python, Haskell, Java, TypeScript, JavaScript, Go, HTML/CSS, Docker. \\[\cvtablerowskip]
+  \tablelabel{Languages} & German native; English professional.
+\end{tabularx}%
+\endgroup
+
+\end{document}

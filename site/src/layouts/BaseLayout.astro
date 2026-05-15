@@ -1,0 +1,115 @@
+---
+import "../styles/global.css";
+import { IconSprite } from "../components/common/Icon";
+import { Footer } from "../components/layout/Footer";
+import { Header } from "../components/layout/Header";
+import type { SocialImage } from "../images";
+import styles from "./BaseLayout.module.css";
+
+type Props = {
+  title: string;
+  description: string;
+  socialImage: SocialImage;
+};
+
+const { title, description, socialImage } = Astro.props;
+const basePath = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const canonicalUrl = new URL(basePath, Astro.site).toString();
+const socialImageUrl = new URL(socialImage.src, Astro.site).toString();
+const personStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Philipp Schröer",
+  jobTitle: "PhD Student in Formal Verification",
+  affiliation: {
+    "@type": "CollegeOrUniversity",
+    name: "RWTH Aachen University",
+  },
+  email: "mailto:mail@pschroer.de",
+  url: canonicalUrl,
+  sameAs: [
+    "https://moves.rwth-aachen.de/people/philipp-schroer/",
+    "https://github.com/Philipp15b/",
+    "https://www.linkedin.com/in/philipp-schroer/",
+    "https://orcid.org/0000-0002-4329-530X",
+  ],
+  knowsAbout: [
+    "probabilistic programs",
+    "formal verification",
+    "probabilistic program verification",
+    "SMT solving",
+    "model checking",
+    "program analysis",
+  ],
+} as const;
+const personStructuredDataJson = JSON.stringify(personStructuredData).replace(
+  /</g,
+  "\\u003c",
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const media = window.matchMedia("(prefers-color-scheme: dark)");
+        let stored = null;
+
+        root.classList.add("js");
+
+        try {
+          stored = localStorage.getItem("theme");
+        } catch {
+          stored = null;
+        }
+
+        // CSS handles the no-JS system theme; this preserves stored JS overrides.
+        const theme =
+          stored === "dark" || stored === "light"
+            ? stored
+            : media.matches
+              ? "dark"
+              : "light";
+        root.dataset.activeTheme = theme;
+      })();
+    </script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Philipp Schröer" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href={`${basePath}favicon.svg`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:type" content={socialImage.type} />
+    <meta property="og:image:width" content={socialImage.width} />
+    <meta property="og:image:height" content={socialImage.height} />
+    <meta property="og:image:alt" content="Portrait of Philipp Schröer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <script type="application/ld+json" set:html={personStructuredDataJson} />
+  </head>
+  <body>
+    <IconSprite />
+    <a class={styles.skipLink} href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import "../scripts/main";
+    </script>
+  </body>
+</html>

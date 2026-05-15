@@ -1,0 +1,4 @@
+/* CSS Modules @value tokens are needed because CSS variables are invalid in @media conditions. */
+@value bpWide: 1040px;
+@value bpMobile: 760px;
+@value bpCompactNav: 360px;

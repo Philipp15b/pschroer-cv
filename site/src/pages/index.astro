@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { HomePage } from "../components/home/HomePage";
+import { siteImages } from "../images";
+import "../styles/responsive.css";
+import "../styles/print.css";
+
+const title = "Philipp Schröer | Formal Verification";
+const description =
+  "Philipp Schröer is a PhD student in the Software Modeling and Verification Group (MOVES) at RWTH Aachen University, working on probabilistic verification, probabilistic programs, and the Caesar verifier.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  socialImage={siteImages.socialPreview}
+>
+  <HomePage images={siteImages} />
+</BaseLayout>

@@ -1,0 +1,126 @@
+@value bpMobile from "../../styles/breakpoints.module.css";
+
+.item {
+  display: grid;
+  grid-template-columns: var(--entry-date-col) minmax(0, 1fr);
+  min-height: 2.4rem;
+  gap: var(--entry-inline-gap);
+  padding: var(--section-entry-gap) 0;
+  border-top: var(--entry-rule);
+}
+
+.item time {
+  color: var(--accent);
+  font-size: var(--entry-date-font-size);
+  font-weight: 850;
+}
+
+.body {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.title {
+  display: flex;
+  gap: 0.4rem;
+  align-items: flex-start;
+  margin-bottom: 0;
+  font-size: 0.98rem;
+  line-height: 1.18;
+}
+
+.title svg {
+  flex: 0 0 auto;
+  width: 0.95rem;
+  height: 0.95rem;
+  margin-top: 0.08rem;
+}
+
+.title svg {
+  color: var(--accent);
+}
+
+.body p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.link {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  color: var(--accent-dark);
+  font-size: 0.82rem;
+  font-weight: 760;
+  text-decoration: underline;
+  text-decoration-color: var(--link-underline-soft);
+  text-underline-offset: 0.18em;
+}
+
+.link svg {
+  width: 0.78rem;
+  height: 0.78rem;
+}
+
+.link:hover {
+  text-decoration-color: currentColor;
+}
+
+@media (max-width: bpMobile) {
+  .item {
+    grid-template-columns: 1fr;
+    gap: 0.24rem;
+    min-height: 0;
+  }
+}
+
+@media print {
+  .item {
+    display: grid;
+    grid-template-columns: var(--date-col) minmax(0, 1fr);
+    gap: var(--print-entry-gap);
+    min-height: 0;
+    margin-top: var(--print-entry-margin-top);
+    padding: var(--print-entry-padding);
+    border: var(--print-card-border);
+    border-radius: var(--print-card-radius);
+    background: linear-gradient(
+      90deg,
+      #edf5f1 0 var(--date-col),
+      #fff var(--date-col)
+    );
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .item > time,
+  .body {
+    grid-column: auto !important;
+  }
+
+  .item time {
+    color: var(--accent);
+    font-size: var(--print-entry-date-font-size);
+    font-weight: 850;
+  }
+
+  .title {
+    margin: var(--print-entry-title-margin);
+    color: var(--ink);
+    font-size: var(--print-entry-title-font-size);
+    line-height: 1.18;
+  }
+
+  .body p {
+    color: var(--muted);
+    font-size: var(--print-entry-body-font-size);
+  }
+
+  .link {
+    color: var(--accent);
+    font-size: 8pt;
+  }
+}

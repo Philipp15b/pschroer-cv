@@ -1,0 +1,42 @@
+@value bpMobile from "../../styles/breakpoints.module.css";
+
+.heading {
+  max-width: var(--measure-wide);
+  margin-bottom: 1.1rem;
+}
+
+.compact {
+  margin-bottom: 0.9rem;
+}
+
+.heading h2 {
+  margin-bottom: 0;
+  font-size: 1.92rem;
+  font-weight: 870;
+}
+
+@media (max-width: bpMobile) {
+  .heading h2 {
+    font-size: 1.68rem;
+  }
+}
+
+@media print {
+  .heading {
+    max-width: none;
+    margin-bottom: 3mm;
+    padding: 1.5mm 2mm;
+    border: var(--print-card-border);
+    border-left: 3pt solid var(--accent);
+    border-radius: var(--print-card-radius);
+    background: linear-gradient(90deg, #edf5f1, #fff);
+    break-after: avoid;
+  }
+
+  .heading h2 {
+    margin: 0;
+    color: var(--accent);
+    font-size: var(--print-section-heading-font-size);
+    line-height: 1.08;
+  }
+}

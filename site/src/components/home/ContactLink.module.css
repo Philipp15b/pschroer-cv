@@ -1,0 +1,60 @@
+.link {
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.62rem 0.72rem;
+  border-bottom: 1px solid var(--contact-border);
+  border-radius: 6px 6px 0 0;
+  background: transparent;
+  color: var(--contact-text-muted);
+  font-size: 0.88rem;
+  font-weight: 650;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease;
+}
+
+.link:hover {
+  transform: translateY(-2px);
+  background: var(--contact-hover-bg);
+  color: var(--contact-text);
+  border-bottom-color: var(--contact-accent);
+  box-shadow: inset 0 -2px 0 var(--contact-accent);
+}
+
+.link svg {
+  flex: 0 0 auto;
+  color: var(--contact-accent);
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.link:hover svg {
+  transform: translateY(-1px) scale(1.08);
+  color: var(--contact-accent-bright);
+}
+
+.printLabel {
+  display: none;
+}
+
+@media print {
+  .printHidden {
+    display: none !important;
+  }
+
+  .screenLabelWithPrintAlternative {
+    display: none;
+  }
+
+  .printLabel {
+    display: inline;
+  }
+}

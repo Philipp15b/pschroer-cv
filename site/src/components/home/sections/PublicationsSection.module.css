@@ -1,0 +1,10 @@
+.list {
+  display: grid;
+  gap: var(--section-entry-gap);
+}
+
+@media print {
+  .list {
+    gap: 0;
+  }
+}

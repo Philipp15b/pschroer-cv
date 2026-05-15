@@ -1,0 +1,39 @@
+@value bpMobile from "../../styles/breakpoints.module.css";
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.35rem max(1.2rem, calc((100vw - var(--max)) / 2));
+  background: var(--contact-bg);
+  color: var(--contact-text-muted);
+}
+
+.footer p {
+  margin: 0;
+}
+
+.name {
+  color: var(--contact-text);
+  font-weight: 820;
+}
+
+.footer a {
+  color: var(--contact-text);
+  font-weight: 760;
+}
+
+@media (max-width: bpMobile) {
+  .footer {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 1.1rem 1rem;
+  }
+}
+
+@media print {
+  .footer {
+    display: none !important;
+  }
+}

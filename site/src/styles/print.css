@@ -1,0 +1,79 @@
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  :root {
+    --ink: #17211f;
+    --text: #26312f;
+    --muted: #536660;
+    --line: rgba(20, 108, 89, 0.22);
+    --accent: #0e4c3e;
+    --accent-warm: #b65f3a;
+    --blue: #315f86;
+    --anchor-offset: 0;
+    --date-col: 34pt;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: none !important;
+  }
+
+  html {
+    font-size: 10.2pt;
+    scroll-padding-top: 0;
+  }
+
+  body {
+    background: #fffdf8 !important;
+    color: var(--text);
+    font-kerning: normal;
+    line-height: 1.34;
+    print-color-adjust: exact;
+    text-rendering: optimizeLegibility;
+    -webkit-print-color-adjust: exact;
+  }
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  :is(h1, h2, h3) {
+    break-after: avoid;
+    page-break-after: avoid;
+    text-wrap: balance;
+  }
+
+  :where(p, li, dd) {
+    hyphenate-limit-chars: 7 3 3;
+    hyphenate-limit-lines: 2;
+    hyphens: auto;
+    orphans: 3;
+    overflow-wrap: break-word;
+    text-wrap: pretty;
+    widows: 3;
+  }
+
+  :where(a, code, pre, kbd, samp, time, .meta) {
+    hyphens: manual;
+    overflow-wrap: normal;
+    text-wrap: wrap;
+  }
+
+  svg {
+    display: none !important;
+  }
+
+  :is(.js [data-reveal], .js [data-reveal][data-reveal-visible="true"]) {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+}

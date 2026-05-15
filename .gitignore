@@ -1,0 +1,17 @@
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.xdv
+.DS_Store
+cv-contact.tex
+pdf/*-contact.pdf
+site/public/files/*-contact.pdf
+.pnpm-store/
+_site/
+site/node_modules/
+site/.astro/
+site/dist/
+site/public/generated-images/

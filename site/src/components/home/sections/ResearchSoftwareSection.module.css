@@ -1,0 +1,253 @@
+@value bpWide, bpMobile from "../../../styles/breakpoints.module.css";
+
+.feature {
+  --feature-column-gap: calc(var(--section-split-gap) * 0.86);
+  --feature-row-gap: calc(var(--section-entry-padding-top) * 1.5);
+  --feature-code-radius: calc(var(--radius) - 1px);
+  --feature-code-padding-block: var(--section-entry-gap);
+  --feature-code-padding-inline: var(--entry-inline-gap);
+  --feature-stat-gap: calc(var(--section-entry-gap) * 1.3);
+  --feature-stat-padding-block: calc(var(--section-entry-gap) / 2);
+  --feature-stat-padding-inline: var(--section-entry-padding-top);
+  display: grid;
+  grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
+  gap: var(--feature-row-gap) var(--feature-column-gap);
+  align-items: start;
+  padding: var(--section-feature-padding);
+  border-top: var(--entry-rule);
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.titleBlock {
+  display: flex;
+  gap: 0.78rem;
+  align-items: center;
+}
+
+.titleBlock img {
+  width: 2.55rem;
+  height: 3.65rem;
+  object-fit: contain;
+}
+
+.titleBlock h3 {
+  margin-bottom: 0.2rem;
+  font-size: 1.32rem;
+}
+
+.titleBlock p,
+.feature > p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.codeLink {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  width: min(19rem, 100%);
+  margin: var(--section-entry-gap) 0 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.codeLink::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0.18rem 0.1rem -0.08rem;
+  border: 1px solid var(--rule-soft);
+  border-radius: var(--feature-code-radius);
+  background: var(--code-backdrop-bg);
+  content: "";
+  pointer-events: none;
+  transform: rotate(-2.4deg);
+  transform-origin: 50% 50%;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+.code {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin: 0;
+  padding: var(--feature-code-padding-block) var(--feature-code-padding-inline);
+  overflow: hidden;
+  border: 1px solid var(--code-border);
+  border-radius: var(--feature-code-radius);
+  background: var(--code-bg-gradient), var(--code-bg);
+  box-shadow: var(--code-shadow);
+  color: var(--code-text);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.66rem;
+  line-height: 1.35;
+  white-space: pre;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease;
+}
+
+.codeLink:hover .code,
+.codeLink:focus-visible .code {
+  --code-text: var(--code-text-hover);
+  border-color: var(--code-border-hover);
+  box-shadow: var(--code-shadow-hover);
+  color: var(--code-text-hover);
+}
+
+.codeLink:hover::before,
+.codeLink:focus-visible::before {
+  background: var(--code-backdrop-bg-hover);
+  transform: translateY(-1px) rotate(-3.2deg);
+}
+
+.codeLink:focus {
+  outline: none;
+}
+
+.codeLink:focus-visible .code {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.code code,
+.codeLine,
+.codeToken {
+  font: inherit;
+}
+
+.codeLine {
+  display: inline;
+}
+
+.stats {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--feature-stat-gap);
+}
+
+.stats div {
+  display: grid;
+  gap: 0.15rem;
+  min-height: 3.7rem;
+  align-content: center;
+  padding: var(--feature-stat-padding-block) 0 var(--feature-stat-padding-block)
+    var(--feature-stat-padding-inline);
+  border-left: 3px solid var(--link-underline);
+}
+
+.stats strong {
+  color: var(--accent-dark);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.stats span {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.links {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: flex-end;
+  margin-top: 0;
+}
+
+.links a {
+  min-height: 2.15rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.1rem;
+  border-bottom: 1px solid var(--link-underline-soft);
+  color: var(--accent-dark);
+  font-weight: 760;
+  text-decoration: none;
+}
+
+.links a:hover {
+  border-bottom-color: currentColor;
+}
+
+@media (max-width: bpWide) {
+  .feature {
+    grid-template-columns: 1fr;
+  }
+
+  .codeLink {
+    width: min(18rem, 100%);
+  }
+
+  .links {
+    grid-column: auto;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: bpMobile) {
+  .feature {
+    padding: var(--section-feature-padding-mobile);
+  }
+
+  .codeLink {
+    width: auto;
+    margin-top: 0.5rem;
+  }
+
+  .code {
+    font-size: 0.62rem;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .titleBlock {
+    align-items: flex-start;
+  }
+}
+
+@media print {
+  .feature {
+    display: block;
+    padding: var(--print-card-padding);
+    border: var(--print-card-border);
+    border-radius: var(--print-card-radius);
+    background: linear-gradient(135deg, #edf5f1, #fff);
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .titleBlock {
+    margin-bottom: 2mm;
+  }
+
+  .titleBlock img,
+  .codeLink,
+  .links {
+    display: none !important;
+  }
+
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.2mm;
+    margin-top: 2.6mm;
+  }
+
+  .stats div {
+    min-height: 0;
+    padding: 0 0 0 5pt;
+    border-left: 2pt solid rgba(20, 108, 89, 0.55);
+  }
+
+  .titleBlock h3,
+  .stats strong {
+    color: var(--accent);
+  }
+}

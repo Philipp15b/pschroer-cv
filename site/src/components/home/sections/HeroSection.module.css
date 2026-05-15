@@ -1,0 +1,341 @@
+@value bpWide, bpMobile from "../../../styles/breakpoints.module.css";
+
+.hero {
+  position: relative;
+  min-height: 455px;
+  overflow: hidden;
+  background: var(--hero-bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.shade {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  background: var(--hero-shade);
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  width: min(var(--max), calc(100% - var(--content-gutter)));
+  min-height: 455px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 2.3rem 0;
+}
+
+.intro {
+  display: contents;
+}
+
+.kicker {
+  margin: 0 0 0.5rem;
+  color: var(--accent-warm);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.heading {
+  max-width: 43rem;
+}
+
+.pronunciationBadge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.38rem;
+  height: 1.38rem;
+  margin-left: 0.32rem;
+  padding: 0;
+  border: 1px solid rgb(var(--rgb-accent-warm) / 0.28);
+  border-radius: 6px;
+  background: rgb(var(--rgb-accent-warm) / 0.08);
+  color: var(--accent-warm);
+  cursor: help;
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 1;
+  text-decoration: none;
+  transform: translateY(-0.44em);
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.pronunciationBadge > svg {
+  width: 0.78rem;
+  height: 0.78rem;
+  stroke-width: 2;
+}
+
+.pronunciationBadge:hover,
+.pronunciationBadge:focus-visible {
+  border-color: rgb(var(--rgb-accent-warm) / 0.48);
+  background: rgb(var(--rgb-accent-warm) / 0.14);
+  color: var(--accent-warm);
+}
+
+.pronunciationBadge:focus {
+  outline: none;
+}
+
+.pronunciationBadge:focus-visible {
+  outline: 3px solid var(--focus-ring-warm);
+  outline-offset: 3px;
+}
+
+.pronunciationPopover {
+  position: absolute;
+  z-index: 6;
+  top: calc(100% + 0.34rem);
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  width: max-content;
+  max-width: min(18rem, calc(100vw - 2rem));
+  padding: 0.36rem 0.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 7px;
+  background: var(--popover-bg);
+  box-shadow: var(--popover-shadow);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 720;
+  line-height: 1.1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -0.18rem);
+  transition:
+    opacity 150ms ease,
+    transform 150ms ease;
+}
+
+.pronunciationPopover::before {
+  position: absolute;
+  top: -0.31rem;
+  left: 50%;
+  width: 0.56rem;
+  height: 0.56rem;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+  background: var(--popover-bg);
+  content: "";
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.pronunciationBadge:hover .pronunciationPopover,
+.pronunciationBadge:focus .pronunciationPopover,
+.pronunciationBadge:focus-visible .pronunciationPopover {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.pronunciationKicker {
+  color: var(--accent-warm);
+  font-size: 0.64rem;
+  font-weight: 850;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.pronunciationIpa {
+  color: var(--accent-dark);
+  font-family:
+    "Charis SIL",
+    "Noto Sans",
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  white-space: nowrap;
+}
+
+.pronunciationHint {
+  padding-left: 0.38rem;
+  border-left: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.title {
+  max-width: 43rem;
+  margin-bottom: 0.72rem;
+  color: var(--accent-dark);
+  font-size: 1.12rem;
+  font-weight: 760;
+}
+
+.copy {
+  max-width: 42rem;
+  margin-bottom: 1.05rem;
+  color: var(--text-hero-copy);
+  font-size: 0.98rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+@media (max-width: bpWide) {
+  .hero,
+  .inner {
+    min-height: 470px;
+  }
+
+  .hero h1 {
+    font-size: 3.2rem;
+  }
+}
+
+@media (max-width: bpMobile) {
+  .hero {
+    min-height: auto;
+  }
+
+  .shade {
+    background: var(--hero-shade-mobile);
+  }
+
+  .inner {
+    min-height: auto;
+    width: min(100% - var(--content-gutter-mobile), var(--max));
+    display: block;
+    padding: 1.35rem 0 1.55rem;
+  }
+
+  .intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 5.5rem;
+    gap: 0.85rem;
+    align-items: start;
+    margin-bottom: 0.68rem;
+  }
+
+  .kicker {
+    grid-column: 1 / -1;
+    margin-bottom: -0.22rem;
+  }
+
+  .heading {
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .hero h1 {
+    font-size: 2.32rem;
+  }
+
+  .pronunciationBadge {
+    width: 1.22rem;
+    height: 1.22rem;
+    margin-left: 0.24rem;
+    font-size: 0.58rem;
+  }
+
+  .pronunciationBadge > svg {
+    width: 0.68rem;
+    height: 0.68rem;
+  }
+
+  .pronunciationPopover {
+    gap: 0.32rem;
+    padding: 0.34rem 0.44rem;
+    font-size: 0.78rem;
+  }
+
+  .pronunciationHint {
+    display: none;
+  }
+
+  .title {
+    margin-bottom: 0;
+    font-size: 1.05rem;
+  }
+
+  .copy {
+    max-width: none;
+    margin-bottom: 0.92rem;
+    font-size: 0.96rem;
+  }
+}
+
+@media print {
+  .hero {
+    min-height: 0;
+    margin-bottom: 3mm;
+    padding: 5mm;
+    border: 0.8pt solid var(--line);
+    border-left: 4pt solid var(--accent);
+    border-radius: 7pt;
+    background: linear-gradient(135deg, #edf5f1, #f9efe5) !important;
+  }
+
+  .shade,
+  .actions,
+  .pronunciationBadge,
+  .pronunciationPopover {
+    display: none !important;
+  }
+
+  .inner {
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0 36mm 0 0;
+  }
+
+  .intro {
+    min-height: 0;
+    display: block;
+    padding: 0;
+  }
+
+  .kicker {
+    margin: 0 0 2pt;
+    color: var(--accent-warm);
+    font-size: 7.8pt;
+    font-weight: 850;
+  }
+
+  .hero h1 {
+    max-width: none;
+    margin: 0 0 2pt;
+    color: var(--ink);
+    font-size: 25pt;
+    line-height: 1.02;
+  }
+
+  .title {
+    margin: 0 0 4pt;
+    color: var(--accent);
+    font-size: 11.4pt;
+    font-weight: 800;
+  }
+
+  .copy {
+    max-width: none;
+    margin: 0;
+    color: #263a35;
+    font-size: 9pt;
+  }
+}

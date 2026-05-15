@@ -1,0 +1,70 @@
+@value bpWide, bpMobile from "../../../styles/breakpoints.module.css";
+
+.section {
+  padding: var(--section-padding-block) 0;
+  background: var(--surface);
+}
+
+.light {
+  background: var(--surface-soft);
+}
+
+.muted {
+  background: var(--surface-muted);
+}
+
+.inner {
+  width: min(var(--max), calc(100% - var(--content-gutter)));
+  margin: 0 auto;
+}
+
+.lead {
+  max-width: var(--measure-wide);
+  margin: -0.4rem 0 0.95rem;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.splitLists {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--section-split-gap);
+  align-items: start;
+}
+
+@media (max-width: bpWide) {
+  .splitLists {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: bpMobile) {
+  .section {
+    padding: var(--section-padding-block-mobile) 0;
+  }
+
+  .inner {
+    width: min(100% - var(--content-gutter-mobile), var(--max));
+  }
+}
+
+@media print {
+  .section {
+    min-height: 0;
+    padding: 4mm 0 0;
+    background: transparent !important;
+  }
+
+  .inner {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .splitLists {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5mm;
+    align-items: start;
+  }
+}

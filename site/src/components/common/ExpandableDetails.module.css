@@ -1,0 +1,94 @@
+.details {
+  margin-top: 0.36rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.compact {
+  margin-top: 0;
+  font-size: 0.86rem;
+}
+
+.summary {
+  max-width: 68ch;
+  display: inline;
+  color: var(--text-body-strong);
+  cursor: pointer;
+  font-weight: inherit;
+  list-style: none;
+  outline-offset: 0.18rem;
+}
+
+.compact .summary {
+  max-width: 64ch;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary::after {
+  content: "";
+  display: inline-block;
+  width: 0.38rem;
+  height: 0.38rem;
+  margin-left: 0.38rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  color: var(--muted);
+  opacity: 0.78;
+  transform: translateY(-0.08rem) rotate(45deg);
+  transform-origin: 50% 50%;
+  transition: transform 160ms ease;
+}
+
+.summary:hover {
+  color: var(--accent-dark);
+  text-decoration: underline;
+  text-decoration-color: var(--link-underline-soft);
+  text-underline-offset: 0.18em;
+}
+
+.details[open] .summary::after {
+  transform: translateY(0.06rem) rotate(225deg);
+}
+
+.copy {
+  max-width: 68ch;
+  margin-top: 0.28rem;
+  padding-left: 0.65rem;
+  border-left: 1px solid var(--rule);
+  color: var(--text-body-rich);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.copy p {
+  margin: 0;
+}
+
+.copy p + p {
+  margin-top: 0.5rem;
+}
+
+@media print {
+  .details {
+    display: block;
+    margin-top: 1pt;
+  }
+
+  .compact {
+    font-size: 8.65pt;
+  }
+
+  .summary {
+    display: block;
+    list-style: none;
+  }
+
+  .summary::after,
+  .copy {
+    display: none !important;
+  }
+}

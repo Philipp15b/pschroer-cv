@@ -1,0 +1,23 @@
+{
+  "name": "philipp-schroer-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.3",
+  "scripts": {
+    "predev": "node scripts/generate-responsive-images.mjs",
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1 --port 4321",
+    "prebuild": "node scripts/generate-responsive-images.mjs",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1 --port 4321"
+  },
+  "dependencies": {
+    "@astrojs/react": "^5.0.4",
+    "astro": "^6.3.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "sharp": "0.34.5",
+    "shiki": "^4.0.2",
+    "typescript": "^6.0.3"
+  }
+}

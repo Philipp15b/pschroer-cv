@@ -218,6 +218,11 @@ export const publications: readonly PublicationItem[] = [
         kind: "blog",
       },
       {
+        label: "Preprint",
+        href: "https://arxiv.org/abs/2605.15827",
+        kind: "preprint",
+      },
+      {
         label: "More details",
         href: "https://www.caesarverifier.org/docs/publications#cav-26-caesar-a-deductive-verifier-for-probabilistic-programs",
         kind: "paper",
